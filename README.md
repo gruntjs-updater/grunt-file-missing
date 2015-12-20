@@ -17,19 +17,33 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-file-missing');
 ```
 
-## FileExists task
-_Run this task with the `grunt fileExists` command._
+## FileMissing task
+_Run this task with the `grunt fileMissing` command._
 
 ### Examples
 
+Will fail if either or both are missing:
+
 ```js
-fileExists: {
-  scripts: ['a.js', 'b.js']
+fileMissing: {
+  scripts: {
+    options{
+      files: ['a.js', 'b.js']
+    }
+  }
 },
 ```
 
+**Will not fail**, instead, if one or more files missing, will run `missing` callback function for each missing file, otherwise will run `exists` callback function for files array:
+
 ```js
-fileExists: {
-	scripts: grunt.file.readJSON('scripts.json')
+fileMissing: {
+	test_fixtures: {
+    options{
+      files: ['test/fixtures/*.txt'],
+      missing: function(file){ console.log(file, 'is missing!'); },
+      exists: function(files){ console.log('All these files exist:', files); }
+    }
+  }
 },
 ```

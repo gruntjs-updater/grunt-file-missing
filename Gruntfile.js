@@ -32,7 +32,7 @@ module.exports = function (grunt) {
       all_fail: {
         options: {
           files: ['test/fixtures/*.txt'],
-          exists: function(file){
+          exists: function(files){
             grunt.fail.warn('All files exist, but I want to error anyway!');
           }
         }

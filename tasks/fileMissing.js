@@ -37,8 +37,6 @@ module.exports = function (grunt) {
         }else{
           grunt.log.error('%s doesn’t exist!', file);
         }
-      }else if(config.exists){
-        config.exists(file);
       }
 
       return fileExists;
@@ -46,6 +44,9 @@ module.exports = function (grunt) {
 
 
     if (filesExist) {
+      if(config.exists){
+        config.exists(files);
+      }
       grunt.log.ok();
     }
 
